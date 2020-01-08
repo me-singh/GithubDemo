@@ -6,7 +6,7 @@ MinSdk - 21
 
 TargetSdk - 29
 
-
+![APK](../master/apk/app-debug.apk)
 
 Important Libraries used -
 -
@@ -22,4 +22,4 @@ Important Libraries used -
 
 Tests -
 -
- - 4 Instrumentation tests and 3 Unit tests
+ - Includes Unit as well as some instrumentation tests
