@@ -1,7 +1,10 @@
 package com.appstreet.githubrepotask.ui.repolist
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
@@ -13,13 +16,15 @@ import com.appstreet.githubrepotask.R
 import com.appstreet.githubrepotask.data.RepoService
 import com.appstreet.githubrepotask.databinding.ActivityMainBinding
 import com.appstreet.githubrepotask.ui.GithubRepoAdapter
+import com.appstreet.githubrepotask.ui.repodetail.RepoDetailActivity
 import com.appstreet.githubrepotask.ui.viewmodels.GitHubRepoViewModel
 import javax.inject.Inject
+
 
 class MainActivity : AppCompatActivity() {
 
 
-    private val repoAdapter = GithubRepoAdapter()
+    private val repoAdapter = GithubRepoAdapter(this::onRepoSelected)
     private lateinit var viewModel: GitHubRepoViewModel
     private lateinit var binding: ActivityMainBinding
 
@@ -62,5 +67,13 @@ class MainActivity : AppCompatActivity() {
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.adapter = repoAdapter
+    }
+
+    private fun onRepoSelected(index : Int, view : View) {
+        val intent = Intent(this, RepoDetailActivity::class.java)
+        intent.putExtra("data", viewModel.repoList.value?.get(index))
+        val options =
+            ActivityOptionsCompat.makeSceneTransitionAnimation(this, view, "avatar")
+        startActivity(intent,options.toBundle())
     }
 }

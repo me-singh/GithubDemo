@@ -22,7 +22,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:srcCompat="@tools:sample/avatars"
-        app:imageUrl="@{viewModel.imageUrl}"/>
+        app:imageUrl="@{viewModel.imageUrl}"
+        android:transitionName="avatar"/>
 
         <View
             android:id="@+id/view"

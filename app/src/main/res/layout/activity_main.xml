@@ -56,6 +56,7 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginBottom="16dp"
+                    android:background="@drawable/background_retry_btn"
                     android:maxWidth="328dp"
                     android:onClick="@{(v) -> viewModel.retry()}"
                     android:text="@string/retry"

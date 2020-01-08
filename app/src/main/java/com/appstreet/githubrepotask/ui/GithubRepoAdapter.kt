@@ -2,13 +2,14 @@ package com.appstreet.githubrepotask.ui
 
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.appstreet.githubrepotask.databinding.LayoutRepoItemBinding
 import com.appstreet.githubrepotask.models.TrendingRepos
 import com.appstreet.githubrepotask.ui.viewmodels.RepoViewModel
 
-class GithubRepoAdapter : RecyclerView.Adapter<GithubRepoAdapter.ViewHolder>() {
+class GithubRepoAdapter(private val repoClickListener: ((Int, View) -> Unit)) : RecyclerView.Adapter<GithubRepoAdapter.ViewHolder>() {
 
     var items: ArrayList<TrendingRepos> = ArrayList()
         set(value) {
@@ -24,7 +25,7 @@ class GithubRepoAdapter : RecyclerView.Adapter<GithubRepoAdapter.ViewHolder>() {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
         val binding = LayoutRepoItemBinding.inflate(inflater, parent, false)
-        return ViewHolder(binding, this::onRepoClicked)
+        return ViewHolder(binding, repoClickListener)
     }
 
     private fun onRepoClicked(index: Int) {
@@ -43,14 +44,14 @@ class GithubRepoAdapter : RecyclerView.Adapter<GithubRepoAdapter.ViewHolder>() {
 
     class ViewHolder(
         private val binding: LayoutRepoItemBinding,
-        private val repoClickListener: ((Int) -> Unit)
+        private val repoClickListener: ((Int, View) -> Unit)
     ) : RecyclerView.ViewHolder(binding.root) {
         private val viewModel = RepoViewModel()
 
         init {
             binding.viewModel = viewModel
             binding.root.setOnClickListener {
-                repoClickListener(adapterPosition)
+                repoClickListener(adapterPosition, binding.avatarImage)
             }
         }
 

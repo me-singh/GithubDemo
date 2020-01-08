@@ -1,9 +1,12 @@
 package com.appstreet.githubrepotask.models
 
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 @Entity(tableName = "trendingrepos")
 data class TrendingRepos(
 
@@ -31,9 +34,11 @@ data class TrendingRepos(
     val stars: Int? = 0,
     @SerializedName("url")
     val url: String = ""
-) {
+) : Parcelable {
     @PrimaryKey(autoGenerate = true)
     var id: Int = 0
+
+    @Parcelize
     data class BuiltBy(
         @SerializedName("avatar")
         val avatar: String? = "",
@@ -41,5 +46,5 @@ data class TrendingRepos(
         val href: String? = "",
         @SerializedName("username")
         val username: String? = ""
-    )
+    ) : Parcelable
 }
